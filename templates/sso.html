@@ -1,0 +1,100 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEXUS | SSO Demonstration</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <style>
+        .sso-card {
+            max-width: 520px;
+            margin: 90px auto;
+            padding: 35px;
+            text-align: center;
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+        }
+
+        .google-mark {
+            font-size: 36px;
+            font-weight: 900;
+            margin: 20px;
+            color: #4285f4;
+        }
+
+        .sso-card p {
+            color: var(--muted);
+            line-height: 1.7;
+            font-size: 13px;
+        }
+
+        .sso-button {
+            display: block;
+            margin-top: 25px;
+            padding: 14px;
+            border-radius: 8px;
+            background: var(--green);
+            color: #071b16;
+            font-weight: 800;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+<div class="page">
+
+    <header class="header">
+        <div class="brand">
+            <span class="brand-icon">N</span>
+            <span>NEXUS<span class="accent">.</span></span>
+        </div>
+        <span class="system-status">● IDENTITY SERVICES</span>
+    </header>
+
+    <main class="sso-card">
+
+        <span class="eyebrow">SINGLE SIGN-ON</span>
+
+        <div class="google-mark">G</div>
+
+        <h1>Google SSO</h1>
+
+        <p>
+            Single Sign-On allows users to access approved
+            applications using an identity provider.
+        </p>
+
+        <div class="disclosure">
+            <strong>Simulation only</strong>
+            <p>
+                This is an educational demonstration.
+                No Google account authentication takes place.
+                Never enter Google credentials on this page.
+            </p>
+        </div>
+
+        <h3>How SSO works</h3>
+
+        <p>1. The application redirects the user to an identity provider.</p>
+        <p>2. The identity provider authenticates the user.</p>
+        <p>3. An approved authentication response is returned.</p>
+        <p>4. The application validates the response before granting access.</p>
+
+        <a href="{{ url_for('home') }}" class="sso-button">
+            Return to NEXUS →
+        </a>
+
+    </main>
+
+    <footer>
+        <span>NEXUS IDENTITY SERVICES</span>
+        <span>SSO DEMONSTRATION · v1.0</span>
+    </footer>
+
+</div>
+</body>
+</html>

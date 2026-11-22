@@ -1,0 +1,271 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+:root {
+    --background: #07111b;
+    --panel: #101e2b;
+    --border: #233747;
+    --green: #35d6a0;
+    --text: #edf4fa;
+    --muted: #8da2b3;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    background:
+        radial-gradient(circle at 15% 25%, #12342e 0, transparent 35%),
+        radial-gradient(circle at 85% 75%, #10283b 0, transparent 35%),
+        var(--background);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+}
+
+.page {
+    max-width: 1250px;
+    min-height: 100vh;
+    margin: auto;
+    padding: 35px 55px;
+    display: flex;
+    flex-direction: column;
+}
+
+.header, footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 21px;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+
+.brand-icon {
+    width: 38px;
+    height: 38px;
+    display: grid;
+    place-items: center;
+    background: #123d34;
+    border: 1px solid #237d62;
+    border-radius: 10px;
+    color: var(--green);
+}
+
+.accent {
+    color: var(--green);
+}
+
+.system-status {
+    color: var(--green);
+    font-size: 10px;
+    letter-spacing: 1.5px;
+}
+
+.login-layout {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 430px;
+    align-items: center;
+    gap: 90px;
+    padding: 65px 0;
+}
+
+.eyebrow {
+    color: var(--green);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.intro h1 {
+    font-size: clamp(38px, 5vw, 58px);
+    line-height: 1.15;
+    margin: 25px 0;
+    letter-spacing: -2px;
+}
+
+.intro h1 span {
+    color: var(--green);
+}
+
+.intro > p {
+    max-width: 440px;
+    color: var(--muted);
+    line-height: 1.8;
+    font-size: 14px;
+}
+
+.feature {
+    display: flex;
+    gap: 18px;
+    align-items: flex-start;
+    margin-top: 40px;
+}
+
+.feature > span {
+    color: var(--green);
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.feature strong {
+    font-size: 14px;
+}
+
+.feature p {
+    color: var(--muted);
+    font-size: 12px;
+    margin-top: 7px;
+}
+
+.login-card {
+    background: linear-gradient(145deg, #142534, #0d1925);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 38px;
+    box-shadow: 0 25px 80px #0008;
+}
+
+.lock-icon {
+    color: var(--green);
+    font-size: 22px;
+}
+
+.card-heading h2 {
+    margin-top: 18px;
+    font-size: 21px;
+}
+
+.card-heading p {
+    margin-top: 10px;
+    margin-bottom: 30px;
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+form label {
+    display: block;
+    color: #a9bdcc;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.3px;
+    margin: 20px 0 10px;
+}
+
+form input {
+    width: 100%;
+    height: 49px;
+    padding: 0 15px;
+    background: #091521;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: white;
+    outline: none;
+    font-size: 13px;
+}
+
+form input:focus {
+    border-color: var(--green);
+    box-shadow: 0 0 0 3px #35d6a01c;
+}
+
+form button {
+    width: 100%;
+    height: 49px;
+    margin-top: 28px;
+    border: none;
+    border-radius: 8px;
+    background: var(--green);
+    color: #071b16;
+    font-size: 13px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: .2s;
+}
+
+form button:hover {
+    background: #63edbb;
+    transform: translateY(-2px);
+}
+
+form button span {
+    float: right;
+    margin-right: 10px;
+}
+
+.disclosure {
+    margin-top: 28px;
+    padding: 15px;
+    background: #102b28;
+    border: 1px solid #245b4a;
+    border-radius: 9px;
+}
+
+.disclosure strong {
+    color: var(--green);
+    font-size: 11px;
+}
+
+.disclosure p {
+    color: #a8c0b9;
+    font-size: 10px;
+    line-height: 1.7;
+    margin-top: 7px;
+}
+
+.message {
+    color: var(--green);
+    margin-top: 15px;
+    font-size: 12px;
+}
+
+footer {
+    padding-top: 25px;
+    border-top: 1px solid var(--border);
+    color: #6d8495;
+    font-size: 9px;
+    letter-spacing: 1.2px;
+}
+
+@media (max-width: 850px) {
+    .page {
+        padding: 25px;
+    }
+
+    .login-layout {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        padding: 55px 0;
+    }
+
+    .login-card {
+        max-width: 500px;
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .system-status {
+        font-size: 8px;
+    }
+
+    .login-card {
+        padding: 25px;
+    }
+
+    footer {
+        gap: 15px;
+        flex-wrap: wrap;
+    }
+}

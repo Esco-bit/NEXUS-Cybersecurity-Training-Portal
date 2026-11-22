@@ -1,0 +1,86 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account | NEXUS</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+    <main class="auth-container">
+        <section class="auth-card">
+
+            <div class="brand">
+                <span class="brand-icon">N</span>
+                <h2>NEXUS<span>.</span></h2>
+            </div>
+
+            <div class="auth-heading">
+                <p class="eyebrow">IDENTITY MANAGEMENT SYSTEM</p>
+                <h1>Create your account</h1>
+                <p>Register for the NEXUS cybersecurity training environment.</p>
+            </div>
+
+            {% if message %}
+                <div class="error-message">{{ message }}</div>
+            {% endif %}
+
+            <form method="POST" action="{{ url_for('register') }}">
+
+                <label for="username">USERNAME</label>
+                <input
+                    type="text"
+                    id="username"
+                    name="username"
+                    placeholder="Choose a username"
+                    minlength="3"
+                    maxlength="30"
+                    required
+                >
+
+                <label for="password">PASSWORD</label>
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="Create a strong password"
+                    minlength="10"
+                    required
+                >
+
+                <label for="confirm_password">CONFIRM PASSWORD</label>
+                <input
+                    type="password"
+                    id="confirm_password"
+                    name="confirm_password"
+                    placeholder="Confirm your password"
+                    minlength="10"
+                    required
+                >
+
+                <button type="submit" class="auth-button">
+                    Create account →
+                </button>
+
+            </form>
+
+            <div class="auth-footer">
+                Already have an account?
+                <a href="{{ url_for('home') }}">Sign in</a>
+            </div>
+
+            <div class="training-notice">
+                <strong>Security awareness training</strong>
+                <p>
+                    This is an authorized training environment.
+                    Use a unique fictional training password.
+                    Your password is stored as a secure hash.
+                </p>
+            </div>
+
+        </section>
+    </main>
+</body>
+</html>

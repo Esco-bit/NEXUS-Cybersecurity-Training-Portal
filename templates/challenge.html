@@ -1,0 +1,403 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>NEXUS | Security Operations</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+    <style>
+        .assessment {
+            max-width: 1000px;
+            margin: 65px auto;
+            width: 100%;
+        }
+
+        .assessment-header {
+            margin-bottom: 35px;
+        }
+
+        .assessment-header h1 {
+            font-size: 36px;
+            margin: 15px 0;
+        }
+
+        .assessment-header p,
+        .challenge p {
+            color: var(--muted);
+            line-height: 1.7;
+        }
+
+        .challenge-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .challenge {
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 25px;
+        }
+
+        .challenge small {
+            color: var(--green);
+            letter-spacing: 1px;
+        }
+
+        .challenge h2 {
+            font-size: 18px;
+            margin: 15px 0 10px;
+        }
+
+        .challenge a {
+            display: inline-block;
+            margin-top: 20px;
+            color: var(--green);
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        .assessment-note {
+            margin-top: 25px;
+            padding: 18px;
+            border: 1px solid #245b4a;
+            border-radius: 10px;
+            color: #a8c0b9;
+            font-size: 12px;
+        }
+
+        /* USER ACCOUNT AREA */
+
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .account-area {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            color: #d5e2ef;
+            font-size: 13px;
+        }
+
+        .user-avatar {
+            width: 34px;
+            height: 34px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #123c4b;
+            border: 1px solid #00d4ff;
+            border-radius: 50%;
+            color: #00d4ff;
+            font-weight: bold;
+        }
+
+        .signout-button {
+            display: inline-block;
+            padding: 10px 16px;
+            border: 1px solid #a94357;
+            border-radius: 7px;
+            color: #ff9aaa;
+            background: #351d28;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+
+        .signout-button:hover {
+            background: #a02e45;
+            color: white;
+        }
+
+        @media(max-width: 650px) {
+            .challenge-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .assessment {
+                margin: 35px auto;
+            }
+
+            .header {
+                align-items: flex-start;
+            }
+
+            .account-area {
+                width: 100%;
+                justify-content: space-between;
+            }
+        }
+/* NEXUS BRAND EMBLEM */
+
+.nexus-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.nexus-emblem {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(145deg, #102d3b, #142c35);
+    border: 1px solid #00d4ff;
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(0, 212, 255, 0.15);
+}
+
+.nexus-brand-text {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.nexus-name {
+    font-size: 23px;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+
+.nexus-tagline {
+    font-size: 9px;
+    letter-spacing: 1.5px;
+    color: #8ba8b9;
+}
+    </style>
+</head>
+
+<body>
+
+<div class="page">
+
+    <header class="header">
+
+        <div class="brand nexus-brand">
+
+    <div class="nexus-emblem">
+        <svg viewBox="0 0 48 48" width="32" height="32"
+             fill="none" xmlns="http://www.w3.org/2000/svg">
+
+            <path d="M24 3L42 10V22C42 33 34 41 24 45C14 41 6 33 6 22V10L24 3Z"
+                  stroke="#00D4FF"
+                  stroke-width="2.5"/>
+
+            <path d="M15 31V17L33 31V17"
+                  stroke="#31D6A3"
+                  stroke-width="3"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"/>
+
+        </svg>
+    </div>
+
+    <div class="nexus-brand-text">
+        <span class="nexus-name">
+            NEXUS<span class="accent">.</span>
+        </span>
+
+        <span class="nexus-tagline">
+            SECURITY OPERATIONS PLATFORM
+        </span>
+    </div>
+
+</div>
+
+        <div class="account-area">
+
+            <div class="user-info">
+                <span class="user-avatar">
+                    {{ username[0]|upper }}
+                </span>
+
+                <span>
+                    Signed in as <strong>{{ username }}</strong>
+                </span>
+            </div>
+
+            <a href="{{ url_for('logout') }}"
+               class="signout-button">
+                Sign Out ↗
+            </a>
+
+        </div>
+
+    </header>
+
+
+    <main class="assessment">
+
+        <div class="assessment-header">
+
+            <span class="eyebrow">
+                SECURITY OPERATIONS CENTER
+            </span>
+
+            <h1>Technical Assessment</h1>
+
+            <p>
+                Test your cybersecurity knowledge through
+                practical security scenarios.
+            </p>
+
+        </div>
+
+
+        <div class="challenge-grid">
+
+            <article class="challenge">
+                <small>MODULE 01 · EMAIL SECURITY</small>
+
+                <h2>Phishing Investigation</h2>
+
+                <p>
+                    Investigate suspicious emails, sender
+                    authentication, spoofing and social engineering.
+                </p>
+
+                <a href="{{ url_for('assessment') }}">
+                    Start assessment →
+                </a>
+            </article>
+
+
+            <article class="challenge">
+                <small>MODULE 02 · NETWORK SECURITY</small>
+
+                <h2>Suspicious URL Analysis</h2>
+
+                <p>
+                    Investigate suspicious domains, URL structures,
+                    redirects and potential threats.
+                </p>
+
+                <a href="{{ url_for('module', module_id='url-analysis') }}">
+                    Start analysis →
+                </a>
+            </article>
+
+
+            <article class="challenge">
+                <small>MODULE 03 · LINUX SECURITY</small>
+
+                <h2>Linux Log Investigation</h2>
+
+                <p>
+                    Examine authentication events, SSH logs
+                    and suspicious login patterns.
+                </p>
+
+                <a href="{{ url_for('module', module_id='linux-logs') }}">
+                    Investigate logs →
+                </a>
+            </article>
+
+
+            <article class="challenge">
+                <small>MODULE 04 · NETWORK ANALYSIS</small>
+
+                <h2>Network Traffic Analysis</h2>
+
+                <p>
+                    Understand TCP, DNS, HTTP and unusual
+                    network communication.
+                </p>
+
+                <a href="{{ url_for('module', module_id='network-analysis') }}">
+                    Analyze traffic →
+                </a>
+            </article>
+
+
+            <article class="challenge">
+                <small>MODULE 05 · INCIDENT RESPONSE</small>
+
+                <h2>Security Incident</h2>
+
+                <p>
+                    Investigate alerts, preserve evidence
+                    and determine containment actions.
+                </p>
+
+                <a href="{{ url_for('module', module_id='incident-response') }}">
+                    Investigate incident →
+                </a>
+            </article>
+
+
+            <article class="challenge">
+                <small>MODULE 06 · SECURITY MONITORING</small>
+
+                <h2>SIEM & SOC Operations</h2>
+
+                <p>
+                    Correlate security events, investigate
+                    alerts and document findings.
+                </p>
+
+                <a href="{{ url_for('module', module_id='siem-soc') }}">
+                    Explore SIEM →
+                </a>
+            </article>
+
+
+            <article class="challenge">
+                <small>MODULE 07 · SYSTEM SECURITY</small>
+
+                <h2>Vulnerability Assessment</h2>
+
+                <p>
+                    Identify weaknesses, prioritize risks
+                    and recommend remediation.
+                </p>
+
+                <a href="{{ url_for('module', module_id='vulnerability-assessment') }}">
+                    Assess vulnerabilities →
+                </a>
+            </article>
+
+        </div>
+
+
+        <div class="assessment-note">
+
+            <strong>AUTHORIZED SECURITY TRAINING</strong>
+
+            <p>
+                This platform is a fictional security-awareness
+                environment. All scenarios and data are simulated.
+            </p>
+
+        </div>
+
+    </main>
+
+
+    <footer>
+        <span>NEXUS SECURITY OPERATIONS</span>
+        <span>TECHNICAL ASSESSMENT · v1.0</span>
+    </footer>
+
+</div>
+
+</body>
+</html>

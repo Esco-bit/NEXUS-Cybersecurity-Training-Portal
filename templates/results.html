@@ -1,0 +1,177 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEXUS | Assessment Results</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+    <style>
+        .results-container {
+            max-width: 950px;
+            margin: 50px auto;
+            width: 100%;
+        }
+
+        .score-card {
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 35px;
+            text-align: center;
+            margin: 25px 0;
+        }
+
+        .score {
+            font-size: 55px;
+            font-weight: 800;
+            color: var(--green);
+            margin: 15px 0;
+        }
+
+        .result-card {
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+            margin: 18px 0;
+        }
+
+        .status-pass {
+            color: var(--green);
+            font-weight: 800;
+        }
+
+        .status-fail {
+            color: #ff6262;
+            font-weight: 800;
+        }
+
+        .answer-detail {
+            margin-top: 15px;
+            padding: 14px;
+            background: #091521;
+            border-radius: 8px;
+            font-size: 13px;
+            line-height: 1.7;
+        }
+
+        .explanation {
+            color: var(--muted);
+            margin-top: 12px;
+            line-height: 1.7;
+            font-size: 13px;
+        }
+
+        .retake-button {
+            display: inline-block;
+            padding: 15px 25px;
+            background: var(--green);
+            color: #071b16;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 800;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+<div class="page">
+
+    <header class="header">
+        <div class="brand">
+            <span class="brand-icon">N</span>
+            <span>NEXUS<span class="accent">.</span></span>
+        </div>
+        <span class="system-status">● ASSESSMENT RESULTS</span>
+    </header>
+
+    <main class="results-container">
+
+        <span class="eyebrow">ASSESSMENT COMPLETE</span>
+
+        <h1 style="margin: 18px 0;">Your Performance Report</h1>
+
+        <section class="score-card">
+
+            <p>FINAL SCORE</p>
+
+            <div class="score">
+                {{ score }} / {{ total }}
+            </div>
+
+            <h2>{{ percentage }}%</h2>
+
+            {% if percentage >= 70 %}
+                <p class="status-pass">PASS — REQUIREMENTS MET</p>
+            {% else %}
+                <p class="status-fail">FAIL — FURTHER PRACTICE REQUIRED</p>
+            {% endif %}
+
+            <p class="explanation">
+                You answered
+                {{ results|selectattr('passed')|list|length }}
+                out of {{ results|length }} questions correctly.
+            </p>
+
+        </section>
+
+        <h2>Question-by-Question Review</h2>
+
+        {% for result in results %}
+
+        <section class="result-card">
+
+            <h3>
+                Question {{ loop.index }}
+            </h3>
+
+            {% if result.passed %}
+                <span class="status-pass">PASS</span>
+            {% else %}
+                <span class="status-fail">FAIL</span>
+            {% endif %}
+
+            <div class="answer-detail">
+                <strong>Your answer:</strong>
+                {{ result.selected }}
+            </div>
+
+            <div class="answer-detail">
+                <strong>Correct answer:</strong>
+                {{ result.correct_answer }}
+            </div>
+
+            <p class="explanation">
+                <strong>Technical explanation:</strong><br>
+                {{ result.explanation }}
+            </p>
+
+            <p class="progress-info">
+                Points: {{ result.points if result.passed else 0 }}
+                / {{ result.points }}
+            </p>
+
+        </section>
+
+        {% endfor %}
+
+        <a href="{{ url_for('assessment') }}"
+           class="retake-button">
+            Retake Assessment →
+        </a>
+
+    </main>
+
+    <footer>
+        <span>NEXUS SECURITY OPERATIONS</span>
+        <span>ASSESSMENT ENGINE · v1.0</span>
+    </footer>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,182 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>NEXUS | {{ module.title }}</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+    <style>
+        .module-container {
+            max-width: 1000px;
+            margin: 55px auto;
+            width: 100%;
+        }
+
+        .module-panel {
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 25px;
+            margin: 22px 0;
+        }
+
+        .module-panel h2 {
+            margin-bottom: 18px;
+            font-size: 18px;
+        }
+
+        .module-panel p,
+        .module-panel li {
+            color: var(--muted);
+            font-size: 13px;
+            line-height: 1.8;
+        }
+
+        .module-panel li {
+            margin: 9px 0;
+        }
+
+        .scenario {
+            border-left: 3px solid var(--green);
+            background: #091521;
+            padding: 20px;
+            border-radius: 7px;
+        }
+
+        .task-number {
+            color: var(--green);
+            font-weight: 800;
+            margin-right: 10px;
+        }
+
+        .module-actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 25px;
+        }
+
+        .module-actions a {
+            padding: 13px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 12px;
+        }
+
+        .primary-action {
+            background: var(--green);
+            color: #071b16;
+        }
+
+        .secondary-action {
+            border: 1px solid var(--border);
+            color: var(--green);
+        }
+    </style>
+</head>
+
+<body>
+<div class="page">
+
+    <header class="header">
+        <div class="brand">
+            <span class="brand-icon">N</span>
+            <span>NEXUS<span class="accent">.</span></span>
+        </div>
+
+        <span class="system-status">
+            ● SECURITY OPERATIONS
+        </span>
+    </header>
+
+    <main class="module-container">
+
+        <span class="eyebrow">{{ module.category }}</span>
+
+        <h1 style="margin:18px 0;">
+            {{ module.title }}
+        </h1>
+
+        <p style="color:var(--muted);line-height:1.8;">
+            {{ module.description }}
+        </p>
+
+        <section class="module-panel">
+
+            <h2>Learning objectives</h2>
+
+            <ul>
+                {% for objective in module.objectives %}
+                <li>{{ objective }}</li>
+                {% endfor %}
+            </ul>
+
+        </section>
+
+        <section class="module-panel">
+
+            <h2>Investigation scenario</h2>
+
+            <div class="scenario">
+                <p>{{ module.scenario }}</p>
+            </div>
+
+        </section>
+
+        <section class="module-panel">
+
+            <h2>Practical investigation tasks</h2>
+
+            {% for task in module.tasks %}
+
+            <p>
+                <span class="task-number">
+                    TASK {{ loop.index }}
+                </span>
+                {{ task }}
+            </p>
+
+            {% endfor %}
+
+        </section>
+
+        <div class="assessment-note">
+            <strong>AUTHORIZED TRAINING ENVIRONMENT</strong>
+
+            <p>
+                All scenarios are simulated. Perform technical
+                investigations only on systems you own or have
+                explicit authorization to test.
+            </p>
+        </div>
+
+        <div class="module-actions">
+
+            <a href="{{ url_for('challenge') }}"
+               class="primary-action">
+                ← Return to SOC dashboard
+            </a>
+
+            <a href="{{ url_for('assessment') }}"
+               class="secondary-action">
+                Phishing assessment →
+            </a>
+
+        </div>
+
+    </main>
+
+    <footer>
+        <span>NEXUS SECURITY OPERATIONS</span>
+        <span>TECHNICAL TRAINING · v1.0</span>
+    </footer>
+
+</div>
+</body>
+</html>

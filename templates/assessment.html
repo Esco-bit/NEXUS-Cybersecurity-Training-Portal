@@ -1,0 +1,107 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEXUS | Technical Assessment</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        .assessment-container {
+            max-width: 950px;
+            margin: 50px auto;
+            width: 100%;
+        }
+        .question-card {
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 25px;
+            margin: 22px 0;
+        }
+        .question-card h3 { margin: 14px 0; font-size: 16px; line-height: 1.6; }
+        .question-meta { color: var(--green); font-size: 10px; letter-spacing: 1px; }
+        .answer-option {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+            padding: 13px;
+            margin-top: 9px;
+            background: #091521;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 13px;
+        }
+        .answer-option:hover { border-color: var(--green); }
+        .answer-option input { accent-color: var(--green); }
+        .submit-assessment {
+            background: var(--green);
+            color: #071b16;
+            border: 0;
+            padding: 16px 30px;
+            border-radius: 8px;
+            font-weight: 800;
+            cursor: pointer;
+        }
+        .progress-info { color: var(--muted); font-size: 12px; }
+    </style>
+</head>
+<body>
+<div class="page">
+    <header class="header">
+        <div class="brand">
+            <span class="brand-icon">N</span>
+            <span>NEXUS<span class="accent">.</span></span>
+        </div>
+        <span class="system-status">● SECURITY OPERATIONS</span>
+    </header>
+
+    <main class="assessment-container">
+        <span class="eyebrow">TECHNICAL CERTIFICATION TRACK</span>
+        <h1 style="margin:18px 0;">{{ assessment.title }}</h1>
+        <p class="progress-info">
+            {{ assessment.category }} · {{ assessment.difficulty }}
+            · {{ assessment.questions|length }} Questions · 100 Points
+        </p>
+
+        <form method="POST" action="{{ url_for('grade_assessment') }}">
+            {% for question in assessment.questions %}
+            <section class="question-card">
+                <span class="question-meta">
+                    QUESTION {{ question.id }} · {{ question.difficulty|upper }}
+                    · {{ question.points }} POINTS
+                </span>
+
+                <h3>{{ question.question }}</h3>
+
+                {% for option in question.options %}
+                <label class="answer-option">
+                    <input type="radio"
+                           name="q{{ question.id }}"
+                           value="{{ loop.index0 }}"
+                           required>
+                    <span>{{ option }}</span>
+                </label>
+                {% endfor %}
+            </section>
+            {% endfor %}
+
+            <button type="submit" class="submit-assessment">
+                Submit Assessment →
+            </button>
+        </form>
+
+        <div class="assessment-note">
+            <strong>ASSESSMENT NOTICE</strong>
+            <p>Use your technical knowledge to evaluate each scenario. Your answers will be graded and feedback provided.</p>
+        </div>
+    </main>
+
+    <footer>
+        <span>NEXUS SECURITY OPERATIONS</span>
+        <span>ASSESSMENT ENGINE · v1.0</span>
+    </footer>
+</div>
+</body>
+</html>
